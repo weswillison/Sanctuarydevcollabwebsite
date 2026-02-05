@@ -47,8 +47,8 @@ export function Footer() {
           <div>
             <h4 className="mb-3">Get in Touch</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>Email: info@sanctuarydevcollaborative.org</li>
-              <li>Phone: (555) 123-4567</li>
+              <li>Email: info@sanctuarydc.org</li>
+              <li>Phone: (856) 389-6053</li>
               <li>
                 <Link to="/contact" className="text-accent hover:text-primary transition-colors">
                   Contact Form →
