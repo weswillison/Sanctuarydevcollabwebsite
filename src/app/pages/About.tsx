@@ -77,7 +77,7 @@ export function About() {
         {/* Hero Content */}
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
           <h1 className="text-4xl md:text-5xl mb-4 text-white">
-            About Sanctuary Development Collaborative
+            About Us
           </h1>
         </div>
       </div>
