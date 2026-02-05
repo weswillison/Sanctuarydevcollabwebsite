@@ -3,7 +3,9 @@ import { Suspense, lazy } from 'react';
 import { Navigation } from '@/app/components/Navigation';
 import { Footer } from '@/app/components/Footer';
 import { ErrorBoundary } from '@/app/components/ErrorBoundary';
-import philadelphiaMap from '@/assets/philadelphia-map.jpg';
+
+// External URL for background - CDN blocks automated downloads but serves to browsers
+const BACKGROUND_IMAGE_URL = 'https://cdn6.picryl.com/photo/1881/01/01/city-of-philadelphia-937f8f-1024.jpg';
 
 // Lazy load page components for code-splitting
 const Home = lazy(() => import('@/app/pages/Home').then(m => ({ default: m.Home })));
@@ -31,7 +33,7 @@ export default function App() {
         <div
           className="fixed inset-0 opacity-[0.065] bg-center pointer-events-none z-[-1]"
           style={{
-            backgroundImage: `url(${philadelphiaMap})`,
+            backgroundImage: `url(${BACKGROUND_IMAGE_URL})`,
             backgroundSize: "125%",
             filter: "grayscale(100%) contrast(1.4)",
           }}
