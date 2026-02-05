@@ -2,9 +2,14 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Building2, Users, LineChart, Shield } from 'lucide-react';
 import { Button } from '@/app/components/ui/button';
 import { Card } from '@/app/components/ui/card';
+import { useSEO } from '@/app/hooks/useSEO';
 import heroImage from 'figma:asset/3cfeb853f6614dc6b7474e4b00aeab779337a287.png';
 
 export function Home() {
+  useSEO({
+    title: 'Home',
+    description: 'Expert real estate development consulting for churches. We help you maximize your property\'s potential while staying true to your mission.'
+  });
   const services = [
     {
       icon: Building2,

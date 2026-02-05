@@ -2,8 +2,29 @@ import { Card } from '@/app/components/ui/card';
 import { Button } from '@/app/components/ui/button';
 import { Building2, Users, TrendingUp, Church, MapPin, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useSEO } from '@/app/hooks/useSEO';
 
 export function OurWork() {
+  useSEO({
+    title: 'Our Work',
+    description: 'Explore case studies of church property transformations. See how we\'ve helped congregations maximize property potential while serving their communities.'
+  });
+  // Object map for Tailwind classes - required for static analysis
+  const colorClasses = {
+    primary: {
+      bg: 'bg-primary/10',
+      text: 'text-primary'
+    },
+    accent: {
+      bg: 'bg-accent/10',
+      text: 'text-accent'
+    },
+    secondary: {
+      bg: 'bg-secondary/10',
+      text: 'text-secondary'
+    }
+  } as const;
+
   const caseStudies = [
     {
       title: 'Grace Community Church',
@@ -19,7 +40,7 @@ export function OurWork() {
         'Maintained worship space and enhanced facilities'
       ],
       icon: Building2,
-      color: 'primary'
+      color: 'primary' as const
     },
     {
       title: 'First Baptist Church',
@@ -35,7 +56,7 @@ export function OurWork() {
         'Strengthened community connections in new location'
       ],
       icon: TrendingUp,
-      color: 'accent'
+      color: 'accent' as const
     },
     {
       title: 'St. Mark\'s Episcopal Church',
@@ -51,7 +72,7 @@ export function OurWork() {
         'Achieved operational sustainability'
       ],
       icon: Church,
-      color: 'secondary'
+      color: 'secondary' as const
     }
   ];
 
@@ -100,8 +121,8 @@ export function OurWork() {
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
                       <div>
                         <div className="flex items-center gap-3 mb-2">
-                          <div className={`w-12 h-12 rounded-lg bg-${study.color}/10 flex items-center justify-center`}>
-                            <study.icon className={`w-6 h-6 text-${study.color}`} />
+                          <div className={`w-12 h-12 rounded-lg ${colorClasses[study.color].bg} flex items-center justify-center`}>
+                            <study.icon className={`w-6 h-6 ${colorClasses[study.color].text}`} />
                           </div>
                           <div>
                             <h2 className="text-2xl">{study.title}</h2>

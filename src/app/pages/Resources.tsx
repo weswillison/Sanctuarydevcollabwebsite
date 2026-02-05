@@ -1,7 +1,59 @@
 import { Card } from '@/app/components/ui/card';
-import { FileText, Video, BookOpen, Download } from 'lucide-react';
+import { Button } from '@/app/components/ui/button';
+import { Input } from '@/app/components/ui/input';
+import { FileText, Video, BookOpen, Download, Loader2 } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import { useState } from 'react';
+import emailjs from '@emailjs/browser';
+import { useSEO } from '@/app/hooks/useSEO';
+
+// TODO: Replace these with your actual Email.js credentials
+// Sign up at https://www.emailjs.com/ to get these values
+const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';
+const EMAILJS_TEMPLATE_ID = 'YOUR_NEWSLETTER_TEMPLATE_ID';
+const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
+
+interface NewsletterFormData {
+  email: string;
+}
 
 export function Resources() {
+  useSEO({
+    title: 'Resources',
+    description: 'Guides, tools, and case studies to help churches make informed property development decisions.'
+  });
+
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors }
+  } = useForm<NewsletterFormData>();
+
+  const onSubscribe = async (data: NewsletterFormData) => {
+    setSubmitStatus('loading');
+
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          subscriber_email: data.email,
+          subscription_type: 'Newsletter',
+        },
+        EMAILJS_PUBLIC_KEY
+      );
+
+      setSubmitStatus('success');
+      reset();
+    } catch (error) {
+      setSubmitStatus('error');
+      console.error('Email.js error:', error);
+    }
+  };
+
   const guides = [
     {
       title: 'Property Assessment Checklist',
@@ -108,16 +160,51 @@ export function Resources() {
           <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
             Subscribe to our newsletter for the latest insights, case studies, and resources for church property development.
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-            <input
-              type="email"
-              placeholder="Your email address"
-              className="flex-1 px-4 py-2 rounded-md border border-border bg-background"
-            />
-            <button className="px-6 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors">
-              Subscribe
-            </button>
-          </div>
+
+          {submitStatus === 'success' ? (
+            <p className="text-green-700 font-medium">
+              Thank you for subscribing! We'll be in touch soon.
+            </p>
+          ) : (
+            <form onSubmit={handleSubmit(onSubscribe)} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+              <div className="flex-1">
+                <Input
+                  type="email"
+                  placeholder="Your email address"
+                  {...register('email', {
+                    required: 'Email is required',
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: 'Please enter a valid email'
+                    }
+                  })}
+                  aria-invalid={errors.email ? 'true' : 'false'}
+                />
+                {errors.email && (
+                  <p className="text-sm text-red-600 mt-1 text-left">{errors.email.message}</p>
+                )}
+              </div>
+              <Button
+                type="submit"
+                disabled={submitStatus === 'loading'}
+                className="bg-primary hover:bg-primary/90"
+              >
+                {submitStatus === 'loading' ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : submitStatus === 'error' ? (
+                  'Try Again'
+                ) : (
+                  'Subscribe'
+                )}
+              </Button>
+            </form>
+          )}
+
+          {submitStatus === 'error' && (
+            <p className="text-red-600 text-sm mt-2">
+              Failed to subscribe. Please try again.
+            </p>
+          )}
         </div>
       </div>
     </div>

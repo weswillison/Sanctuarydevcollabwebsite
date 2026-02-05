@@ -3,30 +3,67 @@ import { Button } from '@/app/components/ui/button';
 import { Input } from '@/app/components/ui/input';
 import { Textarea } from '@/app/components/ui/textarea';
 import { Label } from '@/app/components/ui/label';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone, Loader2 } from 'lucide-react';
+import { useForm } from 'react-hook-form';
 import { useState } from 'react';
+import emailjs from '@emailjs/browser';
+import { useSEO } from '@/app/hooks/useSEO';
+
+// TODO: Replace these with your actual Email.js credentials
+// Sign up at https://www.emailjs.com/ to get these values
+const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
+
+interface ContactFormData {
+  name: string;
+  church: string;
+  email: string;
+  phone: string;
+  message: string;
+}
 
 export function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    church: '',
-    email: '',
-    phone: '',
-    message: '',
+  useSEO({
+    title: 'Contact Us',
+    description: 'Get in touch with Sanctuary Development Collaborative. Schedule a free consultation about your church property.'
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // In a real application, this would send the form data to a server
-    alert('Thank you for your inquiry! We will contact you soon.');
-    setFormData({ name: '', church: '', email: '', phone: '', message: '' });
-  };
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors }
+  } = useForm<ContactFormData>();
+
+  const onSubmit = async (data: ContactFormData) => {
+    setSubmitStatus('loading');
+    setErrorMessage('');
+
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name: data.name,
+          from_email: data.email,
+          church: data.church,
+          phone: data.phone || 'Not provided',
+          message: data.message,
+        },
+        EMAILJS_PUBLIC_KEY
+      );
+
+      setSubmitStatus('success');
+      reset();
+    } catch (error) {
+      setSubmitStatus('error');
+      setErrorMessage('Failed to send message. Please try again or contact us directly.');
+      console.error('Email.js error:', error);
+    }
   };
 
   return (
@@ -42,29 +79,49 @@ export function Contact() {
           <div className="lg:col-span-2">
             <Card className="p-8">
               <h2 className="text-2xl mb-6">Send Us a Message</h2>
-              <form onSubmit={handleSubmit} className="space-y-6">
+
+              {submitStatus === 'success' && (
+                <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg text-green-800">
+                  Thank you for your inquiry! We will contact you soon.
+                </div>
+              )}
+
+              {submitStatus === 'error' && (
+                <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-800">
+                  {errorMessage}
+                </div>
+              )}
+
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="name">Your Name *</Label>
                     <Input
                       id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
                       placeholder="Martin Luther"
+                      {...register('name', {
+                        required: 'Name is required',
+                        minLength: { value: 2, message: 'Name must be at least 2 characters' }
+                      })}
+                      aria-invalid={errors.name ? 'true' : 'false'}
                     />
+                    {errors.name && (
+                      <p className="text-sm text-red-600">{errors.name.message}</p>
+                    )}
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="church">Ministry/Institution *</Label>
                     <Input
                       id="church"
-                      name="church"
-                      value={formData.church}
-                      onChange={handleChange}
-                      required
                       placeholder="Wittenberg Castle Church"
+                      {...register('church', {
+                        required: 'Ministry/Institution is required'
+                      })}
+                      aria-invalid={errors.church ? 'true' : 'false'}
                     />
+                    {errors.church && (
+                      <p className="text-sm text-red-600">{errors.church.message}</p>
+                    )}
                   </div>
                 </div>
 
@@ -73,23 +130,28 @@ export function Contact() {
                     <Label htmlFor="email">Email Address *</Label>
                     <Input
                       id="email"
-                      name="email"
                       type="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
                       placeholder="marty@reformation.org"
+                      {...register('email', {
+                        required: 'Email is required',
+                        pattern: {
+                          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                          message: 'Please enter a valid email address'
+                        }
+                      })}
+                      aria-invalid={errors.email ? 'true' : 'false'}
                     />
+                    {errors.email && (
+                      <p className="text-sm text-red-600">{errors.email.message}</p>
+                    )}
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="phone">Phone Number</Label>
                     <Input
                       id="phone"
-                      name="phone"
                       type="tel"
-                      value={formData.phone}
-                      onChange={handleChange}
                       placeholder="1(800)95THESES"
+                      {...register('phone')}
                     />
                   </div>
                 </div>
@@ -98,17 +160,33 @@ export function Contact() {
                   <Label htmlFor="message">How can we help? *</Label>
                   <Textarea
                     id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
                     rows={6}
                     placeholder="Timeline, location, hopes, biggest concerns, etc."
+                    {...register('message', {
+                      required: 'Message is required',
+                      minLength: { value: 10, message: 'Please provide more details (at least 10 characters)' }
+                    })}
+                    aria-invalid={errors.message ? 'true' : 'false'}
                   />
+                  {errors.message && (
+                    <p className="text-sm text-red-600">{errors.message.message}</p>
+                  )}
                 </div>
 
-                <Button type="submit" size="lg" className="w-full md:w-auto bg-accent hover:bg-accent/90">
-                  Send Message
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full md:w-auto bg-accent hover:bg-accent/90"
+                  disabled={submitStatus === 'loading'}
+                >
+                  {submitStatus === 'loading' ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    'Send Message'
+                  )}
                 </Button>
               </form>
             </Card>
@@ -142,20 +220,6 @@ export function Contact() {
                     </a>
                   </div>
                 </div>
-
-                {/* <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground mb-1">Office</p>
-                    <p className="text-foreground">
-                      123 Community Way<br />
-                      Suite 200<br />
-                      Your City, ST 12345
-                    </p>
-                  </div>
-                </div> */}
               </div>
             </Card>
           </div>

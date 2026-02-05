@@ -4,8 +4,13 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/app/components/ui/accordion';
+import { useSEO } from '@/app/hooks/useSEO';
 
 export function FAQs() {
+  useSEO({
+    title: 'FAQs',
+    description: 'Find answers to common questions about church real estate consulting, property development, zoning, and our services.'
+  });
   const faqs = [
     {
       question: 'What types of churches do you work with?',

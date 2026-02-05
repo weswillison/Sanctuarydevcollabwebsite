@@ -10,12 +10,17 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
+import { useSEO } from "@/app/hooks/useSEO";
 import heroImage from "figma:asset/e04b5ddcf6b09092fedb3464492259e9e686797c.png";
 import cricketDentonImage from "figma:asset/0c3216a43fa67afce06141b76c66a1b76af289e1.png";
 import glennMcDowellImage from "figma:asset/1b7b415f562441031e1e8dcd5d5a83039116b7c1.png";
 import daveBrindleyImage from "figma:asset/7014f2814f9b68183784c6c5453d179ffb444c02.png";
 
 export function About() {
+  useSEO({
+    title: 'About Us',
+    description: 'Learn about Sanctuary Development Collaborative\'s mission to help churches steward their properties for congregational vitality and community flourishing.'
+  });
   const values = [
     {
       icon: Heart,
