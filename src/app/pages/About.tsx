@@ -11,6 +11,9 @@ import {
 import { Link } from "react-router-dom";
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
 import heroImage from "figma:asset/e04b5ddcf6b09092fedb3464492259e9e686797c.png";
+import cricketDentonImage from "figma:asset/0c3216a43fa67afce06141b76c66a1b76af289e1.png";
+import glennMcDowellImage from "figma:asset/1b7b415f562441031e1e8dcd5d5a83039116b7c1.png";
+import daveBrindleyImage from "figma:asset/7014f2814f9b68183784c6c5453d179ffb444c02.png";
 
 export function About() {
   const values = [
@@ -35,46 +38,29 @@ export function About() {
 
   const teamMembers = [
     {
-      name: "Sarah Mitchell",
-      title: "Founder & Lead Consultant",
-      image:
-        "https://images.unsplash.com/photo-1649589244330-09ca58e4fa64?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjB3b21hbiUyMHBvcnRyYWl0fGVufDF8fHx8MTc2ODMxMjE0Nnww&ixlib=rb-4.1.0&q=80&w=1080",
-      bio: "Sarah brings 15 years of experience in real estate development and church leadership. Her unique background combines an M.Div. from Princeton Theological Seminary with an MBA in Real Estate Development. She has guided over 50 congregations through property transitions and development projects.",
+      name: "Dave Brindley",
+      title: "Ministry & Community Development",
+      image: daveBrindleyImage,
+      bio: "Dave Brindley has worked for Cru (Campus Crusade) for over 20 years, the last 16 in West Philly. The past 3 years, he has worked under Cru's City ministry embedded at Resurrection Philadelphia, focusing on efforts to leverage their properties for greater missional engagement. Outside of ministry, he is the zoning chair for Walnut Hill Community Association and is an organizer for the 5th Sq, a pro-housing organization. He is excited for Sanctuary Development Collaborative to provide resources to neighborhood churches and housing to the vulnerable. Dave can often be found biking around the city he loves.",
     },
     {
-      name: "Michael Chen",
-      title: "Real Estate Development Advisor",
+      name: "Matt Peace",
+      title: "Church Engagement & Global Partnership",
       image:
-        "https://images.unsplash.com/photo-1672685667592-0392f458f46f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBtYW4lMjBwb3J0cmFpdHxlbnwxfHx8fDE3NjgyMTUwMDB8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      bio: "Michael is a licensed architect and urban planner with 20 years of experience in community-focused development. He specializes in adaptive reuse projects and has worked with religious institutions across the Philadelphia region to reimagine their spaces for maximum community impact.",
+        "https://images.unsplash.com/photo-1762522927402-f390672558d8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBtYWxlJTIwYnVzaW5lc3MlMjBwb3J0cmFpdHxlbnwxfHx8fDE3NzAyMzQ5NjF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      bio: "Matt Peace serves with World Relief through Churches of Welcome, where he equips and resources churches to faithfully welcome the stranger. With a background in international leadership as former Director of Envision, he has traveled to 78 countries working in cross-cultural project management and global partnership development. Most recently, Matt led a refugee resettlement agency, deepening his understanding of the urgent need for affordable housing and holistic community support. When he's not working, you'll likely find him planning his next trip or cheering on his favorite teams—the Philadelphia Phillies and Chelsea FC.",
     },
     {
-      name: "Rev. Patricia Johnson",
-      title: "Ministry & Community Engagement",
-      image:
-        "https://images.unsplash.com/photo-1655249493799-9cee4fe983bb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBidXNpbmVzcyUyMHBlcnNvbnxlbnwxfHx8fDE3NjgyNDM2Mjh8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      bio: "Rev. Johnson serves as our pastoral consultant, bringing deep understanding of church governance, congregational dynamics, and change management. With 25 years in ministry and experience helping churches through transitions, she ensures that property decisions honor both mission and community.",
+      name: "Glenn McDowell",
+      title: "Housing & Mission Integration",
+      image: glennMcDowellImage,
+      bio: "Glenn McDowell grew up in Paraguay, South America and immigrated to the United States in high school. He has a heart for the poor, the marginalized, the voiceless and powerless. He and his wife Connie have adopted four children, three with special needs. He is on the board of Compound Impact which provides housing for refugees and is City Pastor at Liberti Riverwards Church.",
     },
     {
-      name: "David Martinez",
-      title: "Legal Counsel & Zoning Specialist",
-      image:
-        "https://images.unsplash.com/photo-1736939681295-bb2e6759dddc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBsYXd5ZXIlMjBwb3J0cmFpdHxlbnwxfHx8fDE3Njk0OTMyNDN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      bio: "David is a real estate attorney specializing in religious institutional properties and land use law. With expertise in navigating complex zoning regulations and negotiating development agreements, he helps churches protect their interests while maximizing the potential of their properties.",
-    },
-    {
-      name: "Jennifer Wu",
-      title: "Financial Planning & Capital Strategy",
-      image:
-        "https://images.unsplash.com/photo-1650784854430-3ab0c30afdf3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBmaW5hbmNlJTIwYWR2aXNvciUyMHBvcnRyYWl0fGVufDF8fHx8MTc2OTUzODY5Mnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      bio: "Jennifer is a CPA and financial advisor who specializes in nonprofit capital projects and tax-exempt financing. She helps congregations develop sustainable financial models, access capital, and structure development deals that align with their mission while maintaining fiscal responsibility.",
-    },
-    {
-      name: "Marcus Thompson",
-      title: "Community Impact Coordinator",
-      image:
-        "https://images.unsplash.com/photo-1602566356438-dd36d35e989c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBjb21tdW5pdHklMjBvcmdhbml6ZXIlMjBwb3J0cmFpdHxlbnwxfHx8fDE3Njk1Mzg2OTJ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      bio: "Marcus brings a decade of experience in community organizing and neighborhood development. He facilitates stakeholder engagement processes, ensuring development projects reflect community needs and build authentic partnerships between churches and the neighborhoods they serve.",
+      name: "Rev. Cricket Denton",
+      title: "Student & Mission Ministries",
+      image: cricketDentonImage,
+      bio: "Rev. Cricket Denton is an ordained deacon in the United Methodist Church and serves as Pastor for Student and Mission Ministries at Haddonfield UMC. She earned her Master of Divinity from Drew Theological School and is committed to refugee resettlement, affordable housing, and creating safe spaces of welcome and support. She lives in New Jersey with her husband and two daughters, where she continues to invest in community partnerships that help individuals and families find stability, belonging, and hope.",
     },
   ];
 
@@ -170,16 +156,13 @@ export function About() {
                 {teamMembers.map((member, index) => (
                   <Card key={index} className="p-6 text-center">
                     <div
-                      className="w-24 h-24 rounded-full bg-cover bg-center mx-auto mb-4"
+                      className="w-24 h-24 rounded-full bg-cover bg-center mx-auto mb-1"
                       style={{
                         backgroundImage: `url(${member.image})`,
                       }}
                     />
-                    <h3 className="mb-2">{member.name}</h3>
-                    <p className="text-sm text-muted-foreground">
-                      {member.title}
-                    </p>
-                    <p className="text-xs text-muted-foreground mt-2">
+                    <h3 className="mb-0.5">{member.name}</h3>
+                    <p className="text-xs text-muted-foreground">
                       {member.bio}
                     </p>
                   </Card>
