@@ -48,17 +48,17 @@ export function About() {
     {
       name: "Rev. Cricket Denton",
       image: cricketDentonImage,
-      bio: "Rev. Cricket Denton is an ordained deacon in the United Methodist Church and serves as Pastor for Student and Mission Ministries at Haddonfield UMC. She earned her Master of Divinity from Drew Theological School and is committed to refugee resettlement, affordable housing, and creating safe spaces of welcome and support. She lives in New Jersey with her husband and two daughters, where she continues to invest in community partnerships that help individuals and families find stability, belonging, and hope.",
+      bio: "Cricket is an ordained deacon in the United Methodist Church and serves as Pastor for Student and Mission Ministries at Haddonfield UMC. She earned her Master of Divinity from Drew Theological School and is committed to refugee resettlement, affordable housing, and creating safe spaces of welcome and support. She lives in New Jersey with her husband and two daughters, where she continues to invest in community partnerships that help individuals and families find stability, belonging, and hope.",
     },
     {
       name: "Dave Brindley",
       image: daveBrindleyImage,
-      bio: "Dave Brindley has worked for Cru (Campus Crusade) for over 20 years, the last 16 in West Philly. The past 3 years, he has worked under Cru's City ministry embedded at Resurrection Philadelphia, focusing on efforts to leverage their properties for greater missional engagement. Outside of ministry, he is the zoning chair for Walnut Hill Community Association and is an organizer for the 5th Sq, a pro-housing organization. Dave can often be found biking around the city he loves.",
+      bio: "Dave has worked for Cru (Campus Crusade) for over 20 years, the last 16 in West Philly. The past 3 years, he has worked under Cru's City ministry embedded at Resurrection Philadelphia, focusing on efforts to leverage their properties for greater missional engagement. Outside of ministry, he is the zoning chair for Walnut Hill Community Association and is an organizer for the 5th Sq, a pro-housing organization. Dave can often be found biking around the city he loves.",
     },
     {
       name: "Glenn McDowell",
       image: glennMcDowellImage,
-      bio: "Glenn McDowell grew up in Paraguay, South America and immigrated to the United States in high school. He has a heart for the poor, the marginalized, the voiceless and powerless. He and his wife Connie have adopted four children, three with special needs. He is on the board of Compound Impact which provides housing for refugees and is City Pastor at Liberti Riverwards Church.",
+      bio: "Glenn grew up in Paraguay, South America and immigrated to the United States in high school. He has a heart for the poor, the marginalized, the voiceless and powerless. He and his wife Connie have adopted four children, three with special needs. He is on the board of Compound Impact which provides housing for refugees and is City Pastor at Liberti Riverwards Church.",
     },
     {
       name: "Jason Boyers",
@@ -68,11 +68,11 @@ export function About() {
     {
       name: "Matt Peace",
       image: mattPeaceImage,
-      bio: "Matt Peace serves with World Relief's Churches of Welcome, equipping churches to welcome refugees and immigrants. As former Director of Envision, he has worked across 78 countries in global partnerships and cross-cultural development. He most recently led a refugee resettlement agency, working directly on the urgent needs of affordable housing and holistic community support. Outside of work, he's planning his next trip or cheering on the Phillies and Chelsea FC.",
+      bio: "Matt serves with World Relief's Churches of Welcome, equipping churches to welcome refugees and immigrants. As former Director of Envision, he has worked across 78 countries in global partnerships and cross-cultural development. He most recently led a refugee resettlement agency, working directly on the urgent needs of affordable housing and holistic community support. Outside of work, he's planning his next trip or cheering on the Phillies and Chelsea FC.",
     },
     {
       name: "Robert V. Peters",
-      bio: "Robert V. Peters is a seasoned developer and consultant who has helped create over 5,000 units of affordable housing and raised more than $1 billion to finance projects serving very low-income and vulnerable populations. A former Mennonite minister and graduate of CMBC and AMBS, he brings a faith-informed commitment to justice, community, and service into all of his work. He has partnered with churches across denominations to reimagine underutilized properties, transforming them into vibrant community assets and new forms of ministry. He lives in Germantown with his wife.",
+      bio: "Robert is a seasoned developer and consultant who has helped create over 5,000 units of affordable housing and raised more than $1 billion to finance projects serving very low-income and vulnerable populations. A former Mennonite minister and graduate of CMBC and AMBS, he brings a faith-informed commitment to justice, community, and service into all of his work. He has partnered with churches across denominations to reimagine underutilized properties, transforming them into vibrant community assets and new forms of ministry. He lives in Germantown with his wife.",
     },
     {
       name: "Wes Willison",
