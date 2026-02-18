@@ -8,7 +8,7 @@ import heroImage from 'figma:asset/3cfeb853f6614dc6b7474e4b00aeab779337a287.png'
 export function Home() {
   useSEO({
     title: 'Home',
-    description: 'Expert real estate development consulting for churches. We help you maximize your property\'s potential while staying true to your mission.'
+    description: 'Your building should be a support to your ministry, not a barrier. We help you understand and navigate your real estate options.'
   });
   const services = [
     {
@@ -50,8 +50,7 @@ export function Home() {
             <span className="block text-accent-foreground mt-2">Into Community Assets</span>
           </h1>
           <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto mb-8">
-            Expert real estate development consulting designed specifically for churches. 
-            We help you maximize your property's potential while staying true to your mission.
+            Your building should be a support to your ministry, not a barrier. We help you understand and navigate your real estate options.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/contact">
@@ -72,10 +71,7 @@ export function Home() {
       <section className="py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl mb-4">How We Serve Churches, Ministries, and Institutions</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Comprehensive consulting services tailored to the unique needs of faith communities.
-            </p>
+            <h2 className="text-3xl md:text-4xl">How We Serve Churches, Ministries, and Institutions</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
