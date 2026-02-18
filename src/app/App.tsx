@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import { Navigation } from '@/app/components/Navigation';
 import { Footer } from '@/app/components/Footer';
@@ -45,9 +45,9 @@ export default function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
-              <Route path="/our-work" element={<OurWork />} />
-              <Route path="/faqs" element={<FAQs />} />
-              <Route path="/resources" element={<Resources />} />
+              <Route path="/our-work" element={<Navigate to="/" replace />} />
+              <Route path="/faqs" element={<Navigate to="/" replace />} />
+              <Route path="/resources" element={<Navigate to="/" replace />} />
               <Route path="/contact" element={<Contact />} />
             </Routes>
           </Suspense>

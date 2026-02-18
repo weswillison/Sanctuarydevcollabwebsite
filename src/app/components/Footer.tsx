@@ -25,21 +25,7 @@ export function Footer() {
                   About Us
                 </Link>
               </li>
-              <li>
-                <Link to="/our-work" className="text-muted-foreground hover:text-accent transition-colors">
-                  Our Work
-                </Link>
-              </li>
-              <li>
-                <Link to="/faqs" className="text-muted-foreground hover:text-accent transition-colors">
-                  FAQs
-                </Link>
-              </li>
-              <li>
-                <Link to="/resources" className="text-muted-foreground hover:text-accent transition-colors">
-                  Resources
-                </Link>
-              </li>
+
             </ul>
           </div>
 

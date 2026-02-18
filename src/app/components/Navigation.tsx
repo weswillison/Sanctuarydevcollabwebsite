@@ -10,9 +10,6 @@ export function Navigation() {
   const navLinks = [
     { path: '/', label: 'Home' },
     { path: '/about', label: 'About' },
-    { path: '/our-work', label: 'Our Work' },
-    { path: '/faqs', label: 'FAQs' },
-    { path: '/resources', label: 'Resources' },
     { path: '/contact', label: 'Contact' },
   ];
 
