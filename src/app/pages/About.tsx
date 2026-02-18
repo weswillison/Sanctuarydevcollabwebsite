@@ -17,6 +17,7 @@ import glennMcDowellImage from "figma:asset/1b7b415f562441031e1e8dcd5d5a83039116
 import daveBrindleyImage from "figma:asset/7014f2814f9b68183784c6c5453d179ffb444c02.png";
 import mattPeaceImage from "@/assets/mattPeaceProfile.JPG";
 import wesWillisonImage from "@/assets/wesProfilePic.jpg";
+import jasonBoyersImage from "@/assets/jasonBoyersProfile.jpeg";
 
 export function About() {
   useSEO({
@@ -58,6 +59,11 @@ export function About() {
       name: "Glenn McDowell",
       image: glennMcDowellImage,
       bio: "Glenn McDowell grew up in Paraguay, South America and immigrated to the United States in high school. He has a heart for the poor, the marginalized, the voiceless and powerless. He and his wife Connie have adopted four children, three with special needs. He is on the board of Compound Impact which provides housing for refugees and is City Pastor at Liberti Riverwards Church.",
+    },
+    {
+      name: "Jason Boyers",
+      image: jasonBoyersImage,
+      bio: "Jason brings more than 28 years of experience serving churches and church plants as a pastor and elder. He has also served on nonprofit boards, where he has provided administrative leadership and financial management support. In addition, Jason has spent nearly 25 years as a network sales engineer, giving him a strong appreciation for organizational strategy, operations, and the business realities facing mission-driven organizations. Jason feels a clear calling to come alongside pastors, leaders, and organizations to help them more effectively fulfill their missions. In his free time, Jason enjoys home remodeling, creating music, and serving others in practical ways.",
     },
     {
       name: "Matt Peace",
