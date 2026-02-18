@@ -45,14 +45,14 @@ export function About() {
 
   const teamMembers = [
     {
+      name: "Rev. Cricket Denton",
+      image: cricketDentonImage,
+      bio: "Rev. Cricket Denton is an ordained deacon in the United Methodist Church and serves as Pastor for Student and Mission Ministries at Haddonfield UMC. She earned her Master of Divinity from Drew Theological School and is committed to refugee resettlement, affordable housing, and creating safe spaces of welcome and support. She lives in New Jersey with her husband and two daughters, where she continues to invest in community partnerships that help individuals and families find stability, belonging, and hope.",
+    },
+    {
       name: "Dave Brindley",
       image: daveBrindleyImage,
       bio: "Dave Brindley has worked for Cru (Campus Crusade) for over 20 years, the last 16 in West Philly. The past 3 years, he has worked under Cru's City ministry embedded at Resurrection Philadelphia, focusing on efforts to leverage their properties for greater missional engagement. Outside of ministry, he is the zoning chair for Walnut Hill Community Association and is an organizer for the 5th Sq, a pro-housing organization. He is excited for Sanctuary Development Collaborative to provide resources to neighborhood churches and housing to the vulnerable. Dave can often be found biking around the city he loves.",
-    },
-    {
-      name: "Matt Peace",
-      image: mattPeaceImage,
-      bio: "Matt Peace serves with World Relief through Churches of Welcome, where he equips and resources churches to faithfully welcome the stranger. With a background in international leadership as former Director of Envision, he has traveled to 78 countries working in cross-cultural project management and global partnership development. Most recently, Matt led a refugee resettlement agency, deepening his understanding of the urgent need for affordable housing and holistic community support. When he's not working, you'll likely find him planning his next trip or cheering on his favorite teams—the Philadelphia Phillies and Chelsea FC.",
     },
     {
       name: "Glenn McDowell",
@@ -60,9 +60,13 @@ export function About() {
       bio: "Glenn McDowell grew up in Paraguay, South America and immigrated to the United States in high school. He has a heart for the poor, the marginalized, the voiceless and powerless. He and his wife Connie have adopted four children, three with special needs. He is on the board of Compound Impact which provides housing for refugees and is City Pastor at Liberti Riverwards Church.",
     },
     {
-      name: "Rev. Cricket Denton",
-      image: cricketDentonImage,
-      bio: "Rev. Cricket Denton is an ordained deacon in the United Methodist Church and serves as Pastor for Student and Mission Ministries at Haddonfield UMC. She earned her Master of Divinity from Drew Theological School and is committed to refugee resettlement, affordable housing, and creating safe spaces of welcome and support. She lives in New Jersey with her husband and two daughters, where she continues to invest in community partnerships that help individuals and families find stability, belonging, and hope.",
+      name: "Matt Peace",
+      image: mattPeaceImage,
+      bio: "Matt Peace serves with World Relief through Churches of Welcome, where he equips and resources churches to faithfully welcome the stranger. With a background in international leadership as former Director of Envision, he has traveled to 78 countries working in cross-cultural project management and global partnership development. Most recently, Matt led a refugee resettlement agency, deepening his understanding of the urgent need for affordable housing and holistic community support. When he's not working, you'll likely find him planning his next trip or cheering on his favorite teams—the Philadelphia Phillies and Chelsea FC.",
+    },
+    {
+      name: "Robert V. Peters",
+      bio: "Robert V. Peters is a seasoned developer and consultant who has helped create over 5,000 units of affordable housing and raised more than $1 billion to finance projects serving very low-income and vulnerable populations. A former Mennonite minister and graduate of CMBC and AMBS, he brings a faith-informed commitment to justice, community, and service into all of his work. He has partnered with churches across denominations to reimagine underutilized properties, transforming them into vibrant community assets and new forms of ministry. He lives in Germantown with his wife.",
     },
     {
       name: "Wes Willison",
@@ -94,7 +98,7 @@ export function About() {
         <div className="max-w-4xl mx-auto">
           {/* Mission Statement */}
           <Card className="p-8 mb-12 bg-gradient-to-br from-accent/5 to-primary/5">
-            <h2 className="text-2xl mb-4 text-center">
+            <h2 className="text-2xl mb-1 text-center">
               Our Mission
             </h2>
             <p className="text-lg text-center text-muted-foreground">
@@ -141,10 +145,10 @@ export function About() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {values.map((value, index) => (
                 <Card key={index} className="p-6 text-center">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-0.5">
                     <value.icon className="w-6 h-6 text-primary" />
                   </div>
-                  <h3 className="mb-2">{value.title}</h3>
+                  <h3 className="mt-0 mb-0">{value.title}</h3>
                   <p className="text-sm text-muted-foreground">
                     {value.description}
                   </p>
@@ -162,12 +166,20 @@ export function About() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {teamMembers.map((member, index) => (
                   <Card key={index} className="p-6 text-center">
-                    <div
-                      className="w-24 h-24 rounded-full bg-cover bg-center mx-auto mb-0.5"
-                      style={{
-                        backgroundImage: `url(${member.image})`,
-                      }}
-                    />
+                    {member.image ? (
+                      <div
+                        className="w-24 h-24 rounded-full bg-cover bg-center mx-auto mb-0.5"
+                        style={{
+                          backgroundImage: `url(${member.image})`,
+                        }}
+                      />
+                    ) : (
+                      <div className="w-24 h-24 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-0.5">
+                        <span className="text-xl text-primary font-medium">
+                          {member.name.split(" ").map((n) => n[0]).join("")}
+                        </span>
+                      </div>
+                    )}
                     <h3 className="mt-0 mb-0">{member.name}</h3>
                     <p className="text-xs text-muted-foreground">
                       {member.bio}
