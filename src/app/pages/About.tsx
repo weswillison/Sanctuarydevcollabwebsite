@@ -15,6 +15,8 @@ import heroImage from "figma:asset/e04b5ddcf6b09092fedb3464492259e9e686797c.png"
 import cricketDentonImage from "figma:asset/0c3216a43fa67afce06141b76c66a1b76af289e1.png";
 import glennMcDowellImage from "figma:asset/1b7b415f562441031e1e8dcd5d5a83039116b7c1.png";
 import daveBrindleyImage from "figma:asset/7014f2814f9b68183784c6c5453d179ffb444c02.png";
+import mattPeaceImage from "@/assets/mattPeaceProfile.JPG";
+import wesWillisonImage from "@/assets/wesProfilePic.jpg";
 
 export function About() {
   useSEO({
@@ -44,28 +46,28 @@ export function About() {
   const teamMembers = [
     {
       name: "Dave Brindley",
-      title: "Ministry & Community Development",
       image: daveBrindleyImage,
       bio: "Dave Brindley has worked for Cru (Campus Crusade) for over 20 years, the last 16 in West Philly. The past 3 years, he has worked under Cru's City ministry embedded at Resurrection Philadelphia, focusing on efforts to leverage their properties for greater missional engagement. Outside of ministry, he is the zoning chair for Walnut Hill Community Association and is an organizer for the 5th Sq, a pro-housing organization. He is excited for Sanctuary Development Collaborative to provide resources to neighborhood churches and housing to the vulnerable. Dave can often be found biking around the city he loves.",
     },
     {
       name: "Matt Peace",
-      title: "Church Engagement & Global Partnership",
-      image:
-        "https://images.unsplash.com/photo-1762522927402-f390672558d8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBtYWxlJTIwYnVzaW5lc3MlMjBwb3J0cmFpdHxlbnwxfHx8fDE3NzAyMzQ5NjF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      image: mattPeaceImage,
       bio: "Matt Peace serves with World Relief through Churches of Welcome, where he equips and resources churches to faithfully welcome the stranger. With a background in international leadership as former Director of Envision, he has traveled to 78 countries working in cross-cultural project management and global partnership development. Most recently, Matt led a refugee resettlement agency, deepening his understanding of the urgent need for affordable housing and holistic community support. When he's not working, you'll likely find him planning his next trip or cheering on his favorite teams—the Philadelphia Phillies and Chelsea FC.",
     },
     {
       name: "Glenn McDowell",
-      title: "Housing & Mission Integration",
       image: glennMcDowellImage,
       bio: "Glenn McDowell grew up in Paraguay, South America and immigrated to the United States in high school. He has a heart for the poor, the marginalized, the voiceless and powerless. He and his wife Connie have adopted four children, three with special needs. He is on the board of Compound Impact which provides housing for refugees and is City Pastor at Liberti Riverwards Church.",
     },
     {
       name: "Rev. Cricket Denton",
-      title: "Student & Mission Ministries",
       image: cricketDentonImage,
       bio: "Rev. Cricket Denton is an ordained deacon in the United Methodist Church and serves as Pastor for Student and Mission Ministries at Haddonfield UMC. She earned her Master of Divinity from Drew Theological School and is committed to refugee resettlement, affordable housing, and creating safe spaces of welcome and support. She lives in New Jersey with her husband and two daughters, where she continues to invest in community partnerships that help individuals and families find stability, belonging, and hope.",
+    },
+    {
+      name: "Wes Willison",
+      image: wesWillisonImage,
+      bio: <>Wes is a Realtor serving the Philadelphia region. Before entering real estate, he served in churches across the country — primarily within the Vineyard movement — where his passion for the integration of faith, community, and place was formed. He holds a BA in Political Science from Swarthmore College and an MDiv from Princeton Theological Seminary, where his thesis examined the theology of the built environment via architecture and affordances. Wes lives in Kensington with his wife and two corgis, and serves on the boards of <a href="https://nkcdc.org/" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground transition-colors">NKCDC</a> and <a href="https://thesimpleway.org/" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground transition-colors">The Simple Way</a>.</>,
     },
   ];
 
