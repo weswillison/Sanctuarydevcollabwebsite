@@ -163,12 +163,12 @@ export function About() {
                 {teamMembers.map((member, index) => (
                   <Card key={index} className="p-6 text-center">
                     <div
-                      className="w-24 h-24 rounded-full bg-cover bg-center mx-auto mb-1"
+                      className="w-24 h-24 rounded-full bg-cover bg-center mx-auto mb-0.5"
                       style={{
                         backgroundImage: `url(${member.image})`,
                       }}
                     />
-                    <h3 className="mb-0.5">{member.name}</h3>
+                    <h3 className="mt-0 mb-0">{member.name}</h3>
                     <p className="text-xs text-muted-foreground">
                       {member.bio}
                     </p>
