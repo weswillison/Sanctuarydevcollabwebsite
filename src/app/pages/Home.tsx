@@ -37,7 +37,7 @@ export function Home() {
     <div className="min-h-screen">
       {/* Hero Section with Background Image */}
       <section 
-        className="relative bg-cover bg-center py-32 px-4 min-h-[600px] flex items-center"
+        className="relative bg-cover bg-center bg-no-repeat py-32 px-4 min-h-[600px] flex items-center"
         style={{ backgroundImage: `url(${heroImage})` }}
       >
         {/* Color overlay to match theme - brown/green tint */}
