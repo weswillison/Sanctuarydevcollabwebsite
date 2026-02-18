@@ -68,7 +68,7 @@ export function About() {
     {
       name: "Matt Peace",
       image: mattPeaceImage,
-      bio: "Matt Peace serves with World Relief through Churches of Welcome, where he equips and resources churches to faithfully welcome the stranger. With a background in international leadership as former Director of Envision, he has traveled to 78 countries working in cross-cultural project management and global partnership development. Most recently, Matt led a refugee resettlement agency, deepening his understanding of the urgent need for affordable housing and holistic community support. When he's not working, you'll likely find him planning his next trip or cheering on his favorite teams—the Philadelphia Phillies and Chelsea FC.",
+      bio: "Matt Peace serves with World Relief's Churches of Welcome, equipping churches to welcome refugees and immigrants. As former Director of Envision, he has worked across 78 countries in global partnerships and cross-cultural development. He most recently led a refugee resettlement agency, working directly on the urgent needs of affordable housing and holistic community support. Outside of work, he's planning his next trip or cheering on the Phillies and Chelsea FC.",
     },
     {
       name: "Robert V. Peters",
