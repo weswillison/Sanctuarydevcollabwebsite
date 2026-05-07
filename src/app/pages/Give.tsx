@@ -7,7 +7,7 @@ declare global {
 }
 import { useSEO } from '../hooks/useSEO';
 
-export default function Give() {
+export function Give() {
   useSEO({
     title: 'Give | Sanctuary DC',
     description: 'Support our mission by making a donation to Sanctuary DC.',
