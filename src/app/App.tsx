@@ -14,7 +14,6 @@ const OurWork = lazy(() => import('@/app/pages/OurWork').then(m => ({ default: m
 const FAQs = lazy(() => import('@/app/pages/FAQs').then(m => ({ default: m.FAQs })));
 const Resources = lazy(() => import('@/app/pages/Resources').then(m => ({ default: m.Resources })));
 const Contact = lazy(() => import('@/app/pages/Contact').then(m => ({ default: m.Contact })));
-const Give = lazy(() => import('@/app/pages/Give').then(m => ({ default: m.Give })));
 
 // Loading fallback component
 function PageLoader() {
@@ -50,7 +49,6 @@ export default function App() {
               <Route path="/faqs" element={<Navigate to="/" replace />} />
               <Route path="/resources" element={<Navigate to="/" replace />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/give" element={<Give />} />
             </Routes>
           </Suspense>
         </main>
