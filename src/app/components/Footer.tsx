@@ -40,6 +40,11 @@ export function Footer() {
                   Contact Form →
                 </Link>
               </li>
+              <li>
+                <Link to="/give" className="text-muted-foreground hover:text-accent transition-colors">
+                  Give
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
