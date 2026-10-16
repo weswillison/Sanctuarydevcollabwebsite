@@ -212,7 +212,7 @@ export function About() {
                 <Link to="/contact">
                   <Button
                     size="lg"
-                    className="bg-accent hover:bg-accent/90 text-xl px-12 py-8"
+                    className="bg-accent hover:bg-accent/90 text-accent-foreground text-xl px-12 py-8"
                   >
                     Get in Touch{" "}
                     <ArrowRight className="w-6 h-6 ml-2" />

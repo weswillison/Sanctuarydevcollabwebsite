@@ -47,14 +47,14 @@ export function Home() {
         <div className="relative z-10 max-w-7xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl lg:text-6xl mb-6 text-white">
             Transforming Church Properties
-            <span className="block text-accent-foreground mt-2">Into Community Assets</span>
+            <span className="block text-[#f5f2ed] mt-2">Into Community Assets</span>
           </h1>
           <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto mb-8">
             Your building should be a support to your ministry, not a barrier. We help you understand and navigate your real estate options.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/contact">
-              <Button size="lg" className="bg-accent hover:bg-accent/90">
+              <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
                 Get Started <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
@@ -78,7 +78,7 @@ export function Home() {
             {services.map((service, index) => (
               <Card key={index} className="p-6 hover:shadow-lg transition-shadow">
                 <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
-                  <service.icon className="w-6 h-6 text-accent" />
+                  <service.icon className="w-6 h-6 text-accent-strong" />
                 </div>
                 <h3 className="mb-2">{service.title}</h3>
                 <p className="text-sm text-muted-foreground">{service.description}</p>
@@ -96,7 +96,7 @@ export function Home() {
             Schedule a consultation to discuss how we can help your church achieve its real estate goals.
           </p>
           <Link to="/contact">
-            <Button size="lg" className="bg-accent hover:bg-accent/90">
+            <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
               Contact Us Today
             </Button>
           </Link>

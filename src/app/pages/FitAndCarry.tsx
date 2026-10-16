@@ -155,7 +155,7 @@ function Intro({ onStart }: { onStart: () => void }) {
         ))}
       </div>
 
-      <Button size="lg" className="bg-accent hover:bg-accent/90 h-12 px-8 text-base" onClick={onStart}>
+      <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground h-12 px-8 text-base" onClick={onStart}>
         {COPY.start} <ArrowRight className="ml-1" />
       </Button>
       <p className="text-sm text-muted-foreground mt-4">{COPY.introMeta}</p>
@@ -295,7 +295,7 @@ function Questions({
         {isLast ? (
           <Button
             size="lg"
-            className="bg-accent hover:bg-accent/90"
+            className="bg-accent hover:bg-accent/90 text-accent-foreground"
             disabled={answeredCount < QUESTIONS.length}
             onClick={() => finish(state.answers)}
           >
@@ -389,7 +389,7 @@ function ResultsView({
         <p className="text-primary-foreground/90 max-w-xl mx-auto">{COPY.ctaBody}</p>
         <div>
           <Link to="/contact">
-            <Button size="lg" className="bg-accent hover:bg-accent/90 mt-2">
+            <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground mt-2">
               {COPY.ctaButton} <ArrowRight />
             </Button>
           </Link>
@@ -550,7 +550,7 @@ function LeadGate({
           <span>{COPY.gateConversation}</span>
         </label>
         <p className="text-sm text-muted-foreground">{COPY.gatePrivacy}</p>
-        <Button type="submit" size="lg" className="bg-accent hover:bg-accent/90" disabled={status === 'loading'}>
+        <Button type="submit" size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground" disabled={status === 'loading'}>
           {status === 'loading' ? <Loader2 className="animate-spin" /> : null}
           {COPY.gateSubmit}
         </Button>
@@ -597,7 +597,7 @@ function DriversSection({ results }: { results: Results }) {
                   >
                     <span
                       className={`shrink-0 mt-0.5 size-5 rounded border-2 flex items-center justify-center ${
-                        flagged ? 'bg-accent border-accent text-white' : 'border-muted-foreground/40'
+                        flagged ? 'bg-accent border-accent text-accent-foreground' : 'border-muted-foreground/40'
                       }`}
                       aria-label={flagged ? 'Flagged' : 'Not flagged'}
                     >
