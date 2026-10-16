@@ -26,6 +26,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link to="/fit-and-carry" className="text-muted-foreground hover:text-accent-strong transition-colors">
+                  Fit and Carry Diagnostic
+                </Link>
+              </li>
+              <li>
                 <Link to="/give" className="text-muted-foreground hover:text-accent-strong transition-colors">
                   Give
                 </Link>
