@@ -21,12 +21,12 @@ export function Footer() {
             <h4 className="mb-3">Quick Links</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/about" className="text-muted-foreground hover:text-accent transition-colors">
+                <Link to="/about" className="text-muted-foreground hover:text-accent-strong transition-colors">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link to="/give" className="text-muted-foreground hover:text-accent transition-colors">
+                <Link to="/give" className="text-muted-foreground hover:text-accent-strong transition-colors">
                   Give
                 </Link>
               </li>
@@ -40,12 +40,12 @@ export function Footer() {
               <li>Email: info@sanctuarydc.org</li>
               <li>Phone: (856) 389-6053</li>
               <li>
-                <Link to="/contact" className="text-accent hover:text-primary transition-colors">
+                <Link to="/contact" className="text-accent-strong hover:text-primary transition-colors">
                   Contact Form →
                 </Link>
               </li>
               <li>
-                <Link to="/give" className="text-muted-foreground hover:text-accent transition-colors">
+                <Link to="/give" className="text-muted-foreground hover:text-accent-strong transition-colors">
                   Give
                 </Link>
               </li>

@@ -23,7 +23,7 @@ export function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center text-primary hover:text-accent transition-colors">
+          <Link to="/" className="flex items-center text-primary hover:text-accent-strong transition-colors">
             <img src={logo} alt="Sanctuary Development Collaborative" className="h-12 w-auto" />
           </Link>
 

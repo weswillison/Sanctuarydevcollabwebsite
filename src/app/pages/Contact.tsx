@@ -176,7 +176,7 @@ export function Contact() {
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full md:w-auto bg-accent hover:bg-accent/90"
+                  className="w-full md:w-auto bg-accent hover:bg-accent/90 text-accent-foreground"
                   disabled={submitStatus === 'loading'}
                 >
                   {submitStatus === 'loading' ? (
@@ -203,7 +203,7 @@ export function Contact() {
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground mb-1">Email</p>
-                    <a href="mailto:info@sanctuarydc.org" className="text-foreground hover:text-accent">
+                    <a href="mailto:info@sanctuarydc.org" className="text-foreground hover:text-accent-strong">
                       info@sanctuarydc.org
                     </a>
                   </div>
@@ -215,7 +215,7 @@ export function Contact() {
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground mb-1">Phone</p>
-                    <a href="tel:8563896053" className="text-foreground hover:text-accent">
+                    <a href="tel:8563896053" className="text-foreground hover:text-accent-strong">
                       (856) 389-6053‬
                     </a>
                   </div>

@@ -17,7 +17,7 @@ export function OurWork() {
     },
     accent: {
       bg: 'bg-accent/10',
-      text: 'text-accent'
+      text: 'text-accent-strong'
     },
     secondary: {
       bg: 'bg-secondary/10',
@@ -157,7 +157,7 @@ export function OurWork() {
                     <ul className="space-y-2">
                       {study.results.map((result, idx) => (
                         <li key={idx} className="flex items-start gap-2 text-muted-foreground">
-                          <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                          <CheckCircle2 className="w-5 h-5 text-accent-strong flex-shrink-0 mt-0.5" />
                           <span>{result}</span>
                         </li>
                       ))}
@@ -179,7 +179,7 @@ export function OurWork() {
             maximize its property potential while staying true to your mission.
           </p>
           <Link to="/contact">
-            <Button size="lg" className="bg-accent hover:bg-accent/90">
+            <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
               Start the Conversation
             </Button>
           </Link>

@@ -143,10 +143,10 @@ export function Resources() {
               <Card key={index} className="p-6 hover:shadow-lg transition-shadow cursor-pointer">
                 <div className="mb-3">
                   <h3 className="mb-1">{study.title}</h3>
-                  <p className="text-sm text-accent">{study.location}</p>
+                  <p className="text-sm text-accent-strong">{study.location}</p>
                 </div>
                 <p className="text-sm text-muted-foreground">{study.description}</p>
-                <div className="mt-4 text-sm text-primary hover:text-accent transition-colors">
+                <div className="mt-4 text-sm text-primary hover:text-accent-strong transition-colors">
                   Read more →
                 </div>
               </Card>
