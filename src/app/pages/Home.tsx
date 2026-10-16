@@ -5,14 +5,13 @@ import { useSEO } from '@/app/hooks/useSEO';
 import { AXES, QUADRANTS, type QuadrantId } from '@/app/exercises/fit-and-carry/content';
 import heroImage from 'figma:asset/3cfeb853f6614dc6b7474e4b00aeab779337a287.png';
 
-// New home page copy drafted by Claude is in [square brackets] for Wes to rewrite.
 const DIAGNOSTIC = {
-  scrollHint: '[See the Fit and Carry diagnostic]',
-  kicker: '[Free diagnostic]',
+  scrollHint: 'See the Fit and Carry diagnostic',
+  kicker: 'Free diagnostic',
   title: 'Fit and Carry',
-  body: '[Twenty questions to help your leadership team see your building clearly: whether it still serves your mission, and whether you can carry it. You will see where your church lands and what is driving that result.]',
-  button: '[Take the diagnostic]',
-  meta: '[About 10 minutes. Best done by several leaders, then compared.]',
+  body: 'Twenty questions to help your leadership team see your building clearly: whether it still serves your mission, and whether you can carry it over the long haul. You will see where your church lands and what is driving that result.',
+  button: 'Take the diagnostic',
+  meta: 'About 10 minutes. Best done by several leaders, then compared.',
 };
 
 const services = [
