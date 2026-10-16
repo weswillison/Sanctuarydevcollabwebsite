@@ -153,6 +153,14 @@ export function Home() {
 }
 
 // A static picture of the Fit and Carry grid: Fit runs up the side, Carry along the bottom.
+// Green deepens toward Steward: light where things are hardest, solid where they are healthiest.
+const SHADES: Record<QuadrantId, string> = {
+  transform: 'bg-[#f1f5ea]',
+  share: 'bg-[#dfe9cf]',
+  repurpose: 'bg-[#dfe9cf]',
+  steward: 'bg-[#b9d08f]',
+};
+
 function QuadrantPreview() {
   const cells: QuadrantId[] = ['share', 'steward', 'transform', 'repurpose'];
   return (
@@ -162,14 +170,14 @@ function QuadrantPreview() {
           <Link
             key={id}
             to="/fit-and-carry"
-            className="relative bg-card p-5 md:p-7 aspect-square sm:aspect-[5/4] flex flex-col justify-end hover:bg-accent/10 transition-colors group"
+            className={`relative ${SHADES[id]} p-5 md:p-7 aspect-square sm:aspect-[5/4] flex flex-col justify-end hover:brightness-[0.97] transition group`}
           >
             {id === 'steward' && (
               // An example dot, sitting in the empty top of the Steward square
-              <span className="absolute left-[38%] top-[28%] size-4 rounded-full bg-accent ring-4 ring-accent/30 border-2 border-white" aria-hidden />
+              <span className="absolute left-[38%] top-[28%] size-4 rounded-full bg-primary ring-4 ring-white/60 border-2 border-white" aria-hidden />
             )}
             <span className="font-serif text-2xl md:text-3xl mb-1 group-hover:text-primary">{QUADRANTS[id].name}</span>
-            <span className="font-serif italic text-sm md:text-base text-muted-foreground leading-snug">{QUADRANTS[id].question}</span>
+            <span className={`font-serif italic text-sm md:text-base leading-snug ${id === 'steward' ? 'text-[#2f3d1f]' : 'text-muted-foreground'}`}>{QUADRANTS[id].question}</span>
           </Link>
         ))}
       </div>

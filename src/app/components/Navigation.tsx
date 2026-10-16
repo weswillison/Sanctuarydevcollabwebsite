@@ -10,7 +10,7 @@ export function Navigation() {
   const navLinks = [
     { path: '/', label: 'Home' },
     { path: '/about', label: 'About' },
-    { path: '/fit-and-carry', label: 'Diagnostic' },
+    { path: '/fit-and-carry', label: 'Diagnose' },
     { path: '/give', label: 'Give' },
     { path: '/contact', label: 'Contact' },
   ];
