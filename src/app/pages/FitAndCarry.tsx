@@ -34,6 +34,7 @@ interface Lead {
   role: string;
   email: string;
   consent: boolean;
+  conversation: boolean;
 }
 
 interface SessionState {
@@ -343,7 +344,19 @@ function ResultsView({
       <section>
         <p className="text-sm uppercase tracking-widest text-secondary mb-3 text-center print:hidden">{COPY.resultsKicker}</p>
         <div className="grid md:grid-cols-[300px_1fr] gap-8 items-center">
-          <QuadrantGrid fit={results.fit.score} carry={results.carry.score} active={results.quadrant} />
+          <div>
+            <QuadrantGrid fit={results.fit.score} carry={results.carry.score} active={results.quadrant} />
+            <div className="grid grid-cols-2 gap-3 max-w-[300px] mx-auto mt-3">
+              {(['fit', 'carry'] as Axis[]).map((axis) => (
+                <div key={axis} className="rounded-lg border border-border bg-card px-4 py-3 text-center">
+                  <p className="text-sm text-muted-foreground">{AXES[axis].name}</p>
+                  <p className="font-serif text-3xl leading-tight">
+                    {formatScore(results[axis].score)} <span className="text-base text-muted-foreground">{COPY.scoreOutOf}</span>
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
           <div>
             <h1 className="text-4xl md:text-5xl mb-2">{quadrant.name}</h1>
             <p className="font-serif italic text-xl text-primary mb-4">{quadrant.question}</p>
@@ -386,6 +399,10 @@ function ResultsView({
       <p className="hidden print:block text-xs text-center">{COPY.printFooter}</p>
     </div>
   );
+}
+
+function formatScore(n: number) {
+  return Number.isInteger(n) ? String(n) : n.toFixed(1);
 }
 
 function QuadrantGrid({ fit, carry, active }: { fit: number; carry: number; active: QuadrantId }) {
@@ -458,7 +475,7 @@ function LeadGate({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Lead>({ defaultValues: { name: '', church: '', role: '', email: '', consent: false } });
+  } = useForm<Lead>({ defaultValues: { name: '', church: '', role: '', email: '', consent: false, conversation: false } });
 
   const onSubmit = async (lead: Lead) => {
     setStatus('loading');
@@ -484,6 +501,7 @@ function LeadGate({
         role: lead.role.trim() || null,
         email: lead.email.trim(),
         consent_updates: lead.consent,
+        wants_conversation: lead.conversation,
       });
       setState((s) => ({ ...s, saved: true, lead }));
     } catch (e) {
@@ -526,6 +544,10 @@ function LeadGate({
         <label className="flex items-start gap-3 text-base font-normal cursor-pointer">
           <input type="checkbox" className="mt-1.5 size-4 accent-[var(--primary)]" {...register('consent')} />
           <span>{COPY.gateConsent}</span>
+        </label>
+        <label className="flex items-start gap-3 text-base font-normal cursor-pointer">
+          <input type="checkbox" className="mt-1.5 size-4 accent-[var(--primary)]" {...register('conversation')} />
+          <span>{COPY.gateConversation}</span>
         </label>
         <p className="text-sm text-muted-foreground">{COPY.gatePrivacy}</p>
         <Button type="submit" size="lg" className="bg-accent hover:bg-accent/90" disabled={status === 'loading'}>

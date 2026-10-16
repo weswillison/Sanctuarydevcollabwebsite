@@ -22,6 +22,7 @@ create table if not exists public.exercise_leads (
   role             text check (char_length(role) <= 200),
   email            text not null check (email ~* '^[^@\s]+@[^@\s]+\.[^@\s]+$'),
   consent_updates  boolean not null default false,
+  wants_conversation boolean not null default false,
   created_at       timestamptz not null default now()
 );
 
@@ -64,6 +65,7 @@ select
   l.role,
   l.email,
   l.consent_updates,
+  l.wants_conversation,
   r.results->>'quadrant'       as quadrant,
   (r.results->'fit'->>'score')::numeric   as fit_score,
   (r.results->'carry'->>'score')::numeric as carry_score,

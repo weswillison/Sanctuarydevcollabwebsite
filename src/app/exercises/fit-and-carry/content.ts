@@ -1,7 +1,7 @@
 // Fit and Carry: all copy for the web version lives in this file.
 //
 // Copy in [square brackets] is a placeholder drafted by Claude for Wes to
-// rewrite. Everything without brackets matches the approved print version.
+// rewrite. Everything else is approved.
 
 export const EXERCISE_SLUG = 'fit-and-carry';
 export const EXERCISE_VERSION = '2026-10-print-v4';
@@ -113,21 +113,21 @@ export interface DeepDive {
 export const DEEP_DIVES: Record<DeepDiveId, DeepDive> = {
   spaces: {
     id: 'spaces',
-    title: '[Space by space]',
-    prompt: '[For each kind of space, how well does it suit the way we use it?]',
+    title: 'Space by space',
+    prompt: 'For each kind of space, how well does it suit the way we use it?',
     rows: ['Worship', 'Fellowship and gathering', 'Education and children', 'Outreach or community', 'Offices and support'],
     scale: ['Suits how we use it', 'Workable with workarounds', 'Fights how we use it', "We don't have this"],
   },
   neighborhood: {
     id: 'neighborhood',
-    title: '[Our neighborhood]',
-    prompt: '[Compared with the neighborhood around the building, how similar is our congregation?]',
+    title: 'Our neighborhood',
+    prompt: 'Compared with the neighborhood around the building, how similar is our congregation?',
     rows: ['Age', 'Language', 'Culture and ethnicity', 'Income'],
     scale: ['Similar', 'Somewhat different', 'Very different', "We don't know"],
   },
   caretakers: {
     id: 'caretakers',
-    title: '[Caretakers]',
+    title: 'Caretakers',
     prompt: 'If the person who does the most to keep our building running stepped away tomorrow, what would happen?',
     rows: ['Cleaning and setup', 'Repairs and contractors', 'Grounds and snow', 'Bills and paperwork', 'Scheduling and rentals'],
     scale: [
@@ -141,55 +141,57 @@ export const DEEP_DIVES: Record<DeepDiveId, DeepDive> = {
 
 export const COPY = {
   seoTitle: 'Fit and Carry',
-  seoDescription: '[A short self-diagnostic for church leaders: does your building fit your mission, and can you carry it?]',
+  seoDescription: 'A short self-diagnostic for church leaders: does your building fit your mission, and can you carry it?',
 
   // Intro screen
   title: 'Fit and Carry',
-  kicker: '[A building diagnostic for church leaders]',
+  kicker: 'A building diagnostic for church leaders',
   intro: [
     'This is a self-diagnostic tool, not a test. The goal is for you to be honest with yourself and your team, not for us (or anyone) to judge you.',
     'Check one answer for each question. Answer for your church as it actually is today, not as it used to be or how you wish it was. If you don\'t know, check "I don\'t know".',
   ],
-  introMeta: '[20 questions, about 10 minutes]',
-  start: '[Begin]',
+  introMeta: '20 questions, about 10 minutes',
+  start: 'Begin',
 
   // Question screens
   unknown: "I don't know",
   back: 'Back',
   next: 'Next',
-  seeResults: '[See where you land]',
+  seeResults: 'See where you land',
 
   // Results: quadrant (always shown)
-  resultsKicker: '[Where your building sits]',
+  resultsKicker: 'Where your building sits',
   gridFitLabel: 'Fit',
   gridCarryLabel: 'Carry',
-  nearLine: (other: string) => `[You sit close to a line. Read ${other} too.]`,
+  scoreOutOf: '/ 30',
+  nearLine: (other: string) => `You sit close to a line. Read ${other} too.`,
 
   // Lead capture gate
-  gateTitle: '[See what is driving your result]',
-  gateBody: '[Your quadrant names the big question. Your drivers show where to start answering it. Tell us who you are to see your drivers, follow-up questions, and a printable summary to compare with your team.]',
+  gateTitle: 'See what is driving your result',
+  gateBody: "Your quadrant names the big question, but there are drivers that will show you how to start answering it. We'll send you a pdf with your results from this diagnostic as well as a walk through your drivers, so you can show this to your team.",
   gateName: 'Your name',
   gateChurch: 'Church',
-  gateRole: '[Your role (pastor, council member, property committee…)]',
+  gateRole: 'Your role (pastor, council member, property committee…)',
   gateEmail: 'Email address',
-  gateConsent: '[Send me occasional updates from Sanctuary Development Collaborative.]',
-  gatePrivacy: '[We will never sell or share your information. Your answers help us understand what churches in our region are facing.]',
-  gateSubmit: '[Show my drivers]',
-  gateError: '[Something went wrong saving your information. Please try again.]',
+  gateConsent: 'Send me occasional updates from Sanctuary Development Collaborative.',
+  gateConversation: "I'd be interested in a conversation about what's next for our church.",
+  gatePrivacy: 'We will never sell or share your information. Your answers help us understand what churches in our region are facing.',
+  gateSubmit: 'Show my drivers',
+  gateError: 'Something went wrong saving your information. Please try again.',
 
   // Results: drivers
   driversTitle: 'Your drivers',
   driversLead: 'Your quadrant names the big question. Your drivers show where to start answering it.',
-  driversFlaggedNote: '[Highlighted drivers are the ones that deserve close attention.]',
-  driversNone: '[None of the drivers stood out strongly. Start with your quadrant question.]',
+  driversFlaggedNote: 'Highlighted drivers are the ones that deserve close attention.',
+  driversNone: 'None of the drivers stood out strongly. Start with your quadrant question.',
   fitDriversLabel: 'Fit drivers',
   fitDriversNote: 'These explain your Fit score, the side of the grid.',
   carryDriversLabel: 'Carry drivers',
   carryDriversNote: 'These explain your Carry score, the bottom of the grid.',
 
   // Deep dives
-  deepDivesTitle: '[Go a little deeper]',
-  deepDivesLead: '[Based on your drivers, these follow-up questions may help your team see more clearly.]',
+  deepDivesTitle: 'Go a little deeper',
+  deepDivesLead: 'Based on your drivers, these follow-up questions may help your team see more clearly.',
 
   // Name your questions
   questionsTitle: 'Name your questions',
@@ -198,25 +200,25 @@ export const COPY = {
   ourMainDriverQ: "Our main driver's question",
   anotherDriverQ: "Another driver's question",
   councilQ: 'The question we are bringing to council',
-  councilPlaceholder: '[Write it in your own words]',
+  councilPlaceholder: 'Write it in your own words',
 
   // Compare with your team
   compareTitle: 'Compare with your team',
   compareSteps: [
-    '[Ask each person on your team to take Fit and Carry on their own and print their summary.]',
+    'Ask each person on your team to take Fit and Carry on their own and print their summary.',
     'Start with any question where your answers are 2 or more points apart.',
     'Agree on a team score, then read what your quadrant and drivers mean.',
   ],
-  print: '[Print or save as PDF]',
-  restart: '[Start over]',
+  print: 'Print or save as PDF',
+  restart: 'Start over',
 
   // Closing call to action
-  ctaTitle: '[Want to talk it through?]',
-  ctaBody: '[We help congregations work out what comes next for their buildings. A first conversation is free.]',
-  ctaButton: '[Contact us]',
+  ctaTitle: 'Want to talk it through?',
+  ctaBody: 'We help congregations work out what comes next for their buildings. A first conversation is free.',
+  ctaButton: 'Contact us',
 
   // Print summary
   printHeading: 'Fit and Carry: results',
-  printAnswersTitle: '[Your answers]',
+  printAnswersTitle: 'Your answers',
   printFooter: 'Sanctuary Development Collaborative · sanctuarydc.org/fit-and-carry',
 };

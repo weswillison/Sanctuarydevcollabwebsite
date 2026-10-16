@@ -69,6 +69,7 @@ export function saveLead(input: {
   role: string | null;
   email: string;
   consent_updates: boolean;
+  wants_conversation: boolean;
 }) {
   return insert('exercise_leads', input);
 }
