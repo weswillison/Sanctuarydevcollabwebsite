@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
-import logo from 'figma:asset/09b8b157a83f2224eaabf71c940c167e8fa1a2f2.png';
+import logo from '@/assets/brand/sdc-logo-moss.svg';
 
 export function Navigation() {
   const location = useLocation();
@@ -25,7 +25,7 @@ export function Navigation() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center text-primary hover:text-accent-strong transition-colors">
-            <img src={logo} alt="Sanctuary Development Collaborative" className="h-12 w-auto" />
+            <img src={logo} alt="Sanctuary Development Collaborative" className="h-11 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}

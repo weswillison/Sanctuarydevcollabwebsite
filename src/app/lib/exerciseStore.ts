@@ -5,11 +5,16 @@
 //
 // Configure in Netlify (Site settings > Environment variables):
 //   VITE_SUPABASE_URL       e.g. https://abcd1234.supabase.co
-//   VITE_SUPABASE_ANON_KEY  the project's anon / publishable key
+//   VITE_SUPABASE_ANON_KEY  the project's legacy anon key (the long eyJ... JWT)
 // If they are missing, saving is skipped and the exercise still works.
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL as string | undefined;
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
+// Defaults point at the "Sanctuary DC" Supabase project. Both values are public
+// by design (the anon key can only insert, never read); env vars override them.
+const DEFAULT_URL = 'https://oatilvkjunrojitukxgm.supabase.co';
+const DEFAULT_ANON_KEY =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9hdGlsdmtqdW5yb2ppdHVreGdtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIxNzkzNjMsImV4cCI6MjEwNzc1NTM2M30.QXm6EckWQhT7hDJy8LkENcV56C-YZ73qstIG-cIpYLU';
+const SUPABASE_URL = (import.meta.env.VITE_SUPABASE_URL as string | undefined) || DEFAULT_URL;
+const SUPABASE_ANON_KEY = (import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined) || DEFAULT_ANON_KEY;
 
 export const storeEnabled = Boolean(SUPABASE_URL && SUPABASE_ANON_KEY);
 
@@ -82,4 +87,26 @@ export function saveFollowup(input: {
   data: unknown;
 }) {
   return insert('exercise_followups', input);
+}
+
+/**
+ * Ask the server to email the PDF report for a response to the address saved
+ * with its lead. The edge function only ever sends to that stored address, and
+ * only once, so this is safe to call from the browser.
+ */
+export async function requestReport(response_id: string): Promise<void> {
+  if (!storeEnabled) {
+    console.info('[exerciseStore] Supabase not configured; skipped report email.');
+    return;
+  }
+  const res = await fetch(`${SUPABASE_URL}/functions/v1/send-report`, {
+    method: 'POST',
+    headers: {
+      apikey: SUPABASE_ANON_KEY!,
+      Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ response_id }),
+  });
+  if (!res.ok) throw new Error(`Report request failed: ${res.status} ${await res.text()}`);
 }

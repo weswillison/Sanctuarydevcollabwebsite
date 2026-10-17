@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import logo from 'figma:asset/09b8b157a83f2224eaabf71c940c167e8fa1a2f2.png';
+import logo from '@/assets/brand/sdc-logo-moss.svg';
 
 export function Footer() {
   return (
@@ -9,7 +9,7 @@ export function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center text-primary mb-3">
-              <img src={logo} alt="Sanctuary Development Collaborative" className="h-12 w-auto" />
+              <img src={logo} alt="Sanctuary Development Collaborative" className="h-11 w-auto" />
             </div>
             <p className="text-sm text-muted-foreground">
               Empowering churches through strategic real estate development consultation.
