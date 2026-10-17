@@ -168,7 +168,9 @@ export const COPY = {
 
   // Lead capture gate
   gateTitle: 'See what is driving your result',
-  gateBody: "Your quadrant names the big question, but there are drivers that will show you how to start answering it. We'll send you a pdf with your results from this diagnostic as well as a walk through your drivers, so you can show this to your team.",
+  // Until the email report is switched on, this promises a download instead of an email.
+  // Wes's emailed version: "We'll send you a pdf with your results from this diagnostic as well as a walk through your drivers, so you can show this to your team."
+  gateBody: 'Your quadrant names the big question, but there are drivers that will show you how to start answering it. Download a PDF of your results and a walk through your drivers, so you can show this to your team.',
   gateName: 'Your name',
   gateChurch: 'Church',
   gateRole: 'Your role (pastor, council member, property committee…)',
@@ -210,6 +212,9 @@ export const COPY = {
     'Agree on a team score, then read what your quadrant and drivers mean.',
   ],
   print: 'Print or save as PDF',
+  download: 'Download your results (PDF)',
+  downloading: 'Preparing your PDF…',
+  downloadReady: 'Your results are ready. Download a PDF to keep or share with your team.',
   restart: 'Start over',
 
   // Closing call to action
