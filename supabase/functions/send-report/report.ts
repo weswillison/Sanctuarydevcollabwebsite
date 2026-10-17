@@ -1,5 +1,5 @@
-// Builds the Fit and Carry PDF report. Runtime-agnostic: runs in the Supabase
-// edge function (Deno) and in Node for local testing.
+// Builds the Fit and Carry PDF report. Runs in the browser (download button)
+// and in the send-report edge function (npm run sync:edge copies it there).
 import { PDFDocument, PDFFont, PDFPage, StandardFonts, degrees, rgb } from 'pdf-lib';
 import fontkit from '@pdf-lib/fontkit';
 import { AXES, COPY, DRIVERS, QUADRANTS, QUESTIONS, type QuadrantId } from './content.ts';
@@ -293,4 +293,31 @@ export async function buildReport(input: ReportInput, brand?: BrandFonts): Promi
   });
 
   return await doc.save();
+}
+
+/** Brand font files on the npm CDN (IBM Plex, as on sanctuarydc.org). */
+const PLEX = 'https://cdn.jsdelivr.net/npm';
+export const BRAND_FONT_URLS: Record<keyof BrandFonts, string> = {
+  sans: `${PLEX}/@ibm/plex-sans@1.1.0/fonts/complete/woff/IBMPlexSans-Regular.woff`,
+  sansBold: `${PLEX}/@ibm/plex-sans@1.1.0/fonts/complete/woff/IBMPlexSans-SemiBold.woff`,
+  serif: `${PLEX}/@ibm/plex-serif@2.0.0/fonts/complete/woff/IBMPlexSerif-Regular.woff`,
+  serifBold: `${PLEX}/@ibm/plex-serif@2.0.0/fonts/complete/woff/IBMPlexSerif-SemiBold.woff`,
+  serifItalic: `${PLEX}/@ibm/plex-serif@2.0.0/fonts/complete/woff/IBMPlexSerif-Italic.woff`,
+};
+
+/** Fetch the brand fonts; resolves undefined (built-in fonts) if any fail. */
+export async function fetchBrandFonts(): Promise<BrandFonts | undefined> {
+  try {
+    const entries = await Promise.all(
+      Object.entries(BRAND_FONT_URLS).map(async ([k, url]) => {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`${url}: ${res.status}`);
+        return [k, new Uint8Array(await res.arrayBuffer())] as const;
+      }),
+    );
+    return Object.fromEntries(entries) as unknown as BrandFonts;
+  } catch (e) {
+    console.error('Brand fonts unavailable, using built-in fonts', e);
+    return undefined;
+  }
 }

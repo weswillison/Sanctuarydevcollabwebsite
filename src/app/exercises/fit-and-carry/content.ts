@@ -210,6 +210,9 @@ export const COPY = {
     'Agree on a team score, then read what your quadrant and drivers mean.',
   ],
   print: 'Print or save as PDF',
+  download: '[Download your results (PDF)]',
+  downloading: '[Preparing your PDF…]',
+  downloadReady: '[Your results are ready. Download a PDF to keep or share with your team.]',
   restart: 'Start over',
 
   // Closing call to action

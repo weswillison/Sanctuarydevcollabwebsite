@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { ArrowLeft, ArrowRight, Check, Loader2, Printer, RotateCcw } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, Download, Loader2, RotateCcw } from 'lucide-react';
 import { Button } from '@/app/components/ui/button';
 import { Card } from '@/app/components/ui/card';
 import { Input } from '@/app/components/ui/input';
@@ -375,11 +375,15 @@ function ResultsView({
         <LeadGate state={state} setState={setState} results={results} />
       ) : (
         <>
+          <Card className="p-5 md:p-6 gap-3 flex-col sm:flex-row sm:items-center sm:justify-between bg-accent/15 border-accent/40 print:hidden">
+            <p className="text-base">{COPY.downloadReady}</p>
+            <DownloadButton state={state} results={results} />
+          </Card>
           <DriversSection results={results} />
           <DeepDivesSection results={results} state={state} setState={setState} />
           <NameQuestions results={results} state={state} setState={setState} />
           <AnswersForPrint state={state} />
-          <CompareSection onRestart={onRestart} />
+          <CompareSection onRestart={onRestart} state={state} results={results} />
         </>
       )}
 
@@ -786,9 +790,51 @@ function AnswersForPrint({ state }: { state: SessionState }) {
 }
 
 // ---------------------------------------------------------------------------
+// PDF download: the same report the email will carry, built in the browser.
+
+function DownloadButton({ state, results }: { state: SessionState; results: Results }) {
+  const [busy, setBusy] = useState(false);
+  const download = async () => {
+    setBusy(true);
+    try {
+      const { buildReport, fetchBrandFonts } = await import('@/app/exercises/fit-and-carry/report');
+      const pdf = await buildReport(
+        {
+          name: state.lead?.name ?? '',
+          church: state.lead?.church ?? '',
+          date: new Date(),
+          answers: state.answers as Record<string, Answer>,
+          results: compactResults(results),
+        },
+        await fetchBrandFonts(),
+      );
+      const url = URL.createObjectURL(new Blob([pdf], { type: 'application/pdf' }));
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Fit and Carry results${state.lead?.church ? ` - ${state.lead.church}` : ''}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 10_000);
+      saveFollowup({ response_id: state.responseId, exercise: EXERCISE_SLUG, kind: 'event:pdf-download', data: {} }).catch(() => {});
+    } catch (e) {
+      console.error(e);
+      window.print(); // fall back to the browser's print-to-PDF
+    } finally {
+      setBusy(false);
+    }
+  };
+  return (
+    <Button size="lg" onClick={download} disabled={busy} className="shrink-0">
+      {busy ? <Loader2 className="animate-spin" /> : <Download />} {busy ? COPY.downloading : COPY.download}
+    </Button>
+  );
+}
+
+// ---------------------------------------------------------------------------
 // Compare with your team
 
-function CompareSection({ onRestart }: { onRestart: () => void }) {
+function CompareSection({ onRestart, state, results }: { onRestart: () => void; state: SessionState; results: Results }) {
   return (
     <section className="print:hidden">
       <Card className="p-6 md:p-8 gap-4 bg-muted/60">
@@ -799,9 +845,7 @@ function CompareSection({ onRestart }: { onRestart: () => void }) {
           ))}
         </ol>
         <div className="flex flex-wrap gap-3 pt-2">
-          <Button size="lg" onClick={() => window.print()}>
-            <Printer /> {COPY.print}
-          </Button>
+          <DownloadButton state={state} results={results} />
           <Button size="lg" variant="outline" onClick={onRestart} className="hover:bg-muted hover:text-foreground">
             <RotateCcw /> {COPY.restart}
           </Button>
