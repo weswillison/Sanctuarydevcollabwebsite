@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
-    "dev": "vite"
+    "dev": "vite",
+    "sync:edge": "cp src/app/exercises/fit-and-carry/content.ts supabase/functions/send-report/content.ts"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",

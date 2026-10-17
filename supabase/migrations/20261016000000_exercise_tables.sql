@@ -23,6 +23,7 @@ create table if not exists public.exercise_leads (
   email            text not null check (email ~* '^[^@\s]+@[^@\s]+\.[^@\s]+$'),
   consent_updates  boolean not null default false,
   wants_conversation boolean not null default false,
+  report_sent_at   timestamptz,                -- set by the send-report edge function
   created_at       timestamptz not null default now()
 );
 
@@ -53,6 +54,7 @@ create policy "anon can insert followups" on public.exercise_followups
 
 grant insert on public.exercise_responses, public.exercise_leads, public.exercise_followups to anon;
 revoke select, update, delete on public.exercise_responses, public.exercise_leads, public.exercise_followups from anon;
+revoke all on public.exercise_responses, public.exercise_leads, public.exercise_followups from authenticated;
 
 -- A handy view for reviewing leads alongside their results in the dashboard.
 create or replace view public.exercise_leads_with_results
@@ -66,6 +68,7 @@ select
   l.email,
   l.consent_updates,
   l.wants_conversation,
+  l.report_sent_at,
   r.results->>'quadrant'       as quadrant,
   (r.results->'fit'->>'score')::numeric   as fit_score,
   (r.results->'carry'->>'score')::numeric as carry_score,
@@ -73,3 +76,5 @@ select
   r.id                         as response_id
 from public.exercise_leads l
 join public.exercise_responses r on r.id = l.response_id;
+
+revoke all on public.exercise_leads_with_results from anon, authenticated;

@@ -8,7 +8,7 @@ import { Input } from '@/app/components/ui/input';
 import { Label } from '@/app/components/ui/label';
 import { Textarea } from '@/app/components/ui/textarea';
 import { useSEO } from '@/app/hooks/useSEO';
-import { newResponseId, saveFollowup, saveLead, saveResponse } from '@/app/lib/exerciseStore';
+import { newResponseId, requestReport, saveFollowup, saveLead, saveResponse } from '@/app/lib/exerciseStore';
 import {
   AXES,
   COPY,
@@ -504,6 +504,8 @@ function LeadGate({
         wants_conversation: lead.conversation,
       });
       setState((s) => ({ ...s, saved: true, lead }));
+      // Email the PDF report in the background; the page doesn't wait on it.
+      requestReport(state.responseId).catch((e) => console.error(e));
     } catch (e) {
       console.error(e);
       setStatus('error');
