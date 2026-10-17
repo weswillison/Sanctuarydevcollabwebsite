@@ -15,8 +15,39 @@
 // (npm run sync:edge).
 
 import { createClient } from 'npm:@supabase/supabase-js@2.45.4';
-import { buildReport, type ReportInput } from './report.ts';
+import { buildReport, type BrandFonts, type ReportInput } from './report.ts';
 import { DRIVERS, QUADRANTS } from './content.ts';
+
+// Brand fonts (IBM Plex, as on sanctuarydc.org), fetched once per function
+// instance from the npm CDN. If that fails, the report uses built-in PDF fonts.
+const PLEX = 'https://cdn.jsdelivr.net/npm';
+const FONT_URLS: Record<keyof BrandFonts, string> = {
+  sans: `${PLEX}/@ibm/plex-sans@1.1.0/fonts/complete/woff/IBMPlexSans-Regular.woff`,
+  sansBold: `${PLEX}/@ibm/plex-sans@1.1.0/fonts/complete/woff/IBMPlexSans-SemiBold.woff`,
+  serif: `${PLEX}/@ibm/plex-serif@2.0.0/fonts/complete/woff/IBMPlexSerif-Regular.woff`,
+  serifBold: `${PLEX}/@ibm/plex-serif@2.0.0/fonts/complete/woff/IBMPlexSerif-SemiBold.woff`,
+  serifItalic: `${PLEX}/@ibm/plex-serif@2.0.0/fonts/complete/woff/IBMPlexSerif-Italic.woff`,
+};
+let fontsPromise: Promise<BrandFonts | undefined> | null = null;
+function loadFonts(): Promise<BrandFonts | undefined> {
+  fontsPromise ??= (async () => {
+    try {
+      const entries = await Promise.all(
+        Object.entries(FONT_URLS).map(async ([k, url]) => {
+          const res = await fetch(url);
+          if (!res.ok) throw new Error(`${url}: ${res.status}`);
+          return [k, new Uint8Array(await res.arrayBuffer())] as const;
+        }),
+      );
+      return Object.fromEntries(entries) as unknown as BrandFonts;
+    } catch (e) {
+      console.error('Brand fonts unavailable, using built-in fonts', e);
+      fontsPromise = null; // try again next time
+      return undefined;
+    }
+  })();
+  return fontsPromise;
+}
 
 const cors = {
   'Access-Control-Allow-Origin': '*',
@@ -93,13 +124,22 @@ Deno.serve(async (req) => {
   const quadrant = QUADRANTS[results.quadrant];
 
   try {
-    const pdf = await buildReport({
+    const input: ReportInput = {
       name: lead.name,
       church: lead.church,
       date: new Date(lead.created_at),
       answers: response.answers as ReportInput['answers'],
       results,
-    });
+    };
+    const brand = await loadFonts();
+    let pdf: Uint8Array;
+    try {
+      pdf = await buildReport(input, brand);
+    } catch (e) {
+      if (!brand) throw e;
+      console.error('Brand-font PDF failed, retrying with built-in fonts', e);
+      pdf = await buildReport(input);
+    }
 
     const firstName = esc(lead.name.split(/\s+/)[0] ?? lead.name);
     // Email copy drafted by Claude; edit freely.

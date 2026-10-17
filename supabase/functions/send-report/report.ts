@@ -1,9 +1,19 @@
 // Builds the Fit and Carry PDF report. Runtime-agnostic: runs in the Supabase
 // edge function (Deno) and in Node for local testing.
 import { PDFDocument, PDFFont, PDFPage, StandardFonts, degrees, rgb } from 'pdf-lib';
+import fontkit from '@pdf-lib/fontkit';
 import { AXES, COPY, DRIVERS, QUADRANTS, QUESTIONS, type QuadrantId } from './content.ts';
 
 export type Answer = 0 | 1 | 2 | 3 | 'unknown';
+
+/** Brand font files (IBM Plex, as on sanctuarydc.org). TTF, OTF or WOFF bytes. */
+export interface BrandFonts {
+  sans: Uint8Array;
+  sansBold: Uint8Array;
+  serif: Uint8Array;
+  serifBold: Uint8Array;
+  serifItalic: Uint8Array;
+}
 
 export interface ReportInput {
   name: string;
@@ -38,7 +48,7 @@ const H = 792;
 const M = 54;
 
 /** Standard PDF fonts only cover Latin-1-ish text; swap or drop anything else. */
-function clean(s: string): string {
+function latin1(s: string): string {
   return s
     .replace(/[‘’]/g, "'")
     .replace(/[“”]/g, '"')
@@ -51,18 +61,33 @@ function fmt(n: number) {
   return Number.isInteger(n) ? String(n) : n.toFixed(1);
 }
 
-export async function buildReport(input: ReportInput): Promise<Uint8Array> {
+export async function buildReport(input: ReportInput, brand?: BrandFonts): Promise<Uint8Array> {
   const doc = await PDFDocument.create();
   doc.setTitle('Fit and Carry results');
   doc.setAuthor('Sanctuary Development Collaborative');
 
-  const f = {
-    serif: await doc.embedFont(StandardFonts.TimesRoman),
-    serifBold: await doc.embedFont(StandardFonts.TimesRomanBold),
-    serifItalic: await doc.embedFont(StandardFonts.TimesRomanItalic),
-    sans: await doc.embedFont(StandardFonts.Helvetica),
-    sansBold: await doc.embedFont(StandardFonts.HelveticaBold),
-  };
+  // Brand fonts when available; the built-in PDF fonts as a fallback.
+  let f: { serif: PDFFont; serifBold: PDFFont; serifItalic: PDFFont; sans: PDFFont; sansBold: PDFFont };
+  if (brand) {
+    doc.registerFontkit(fontkit);
+    f = {
+      serif: await doc.embedFont(brand.serif, { subset: true }),
+      serifBold: await doc.embedFont(brand.serifBold, { subset: true }),
+      serifItalic: await doc.embedFont(brand.serifItalic, { subset: true }),
+      sans: await doc.embedFont(brand.sans, { subset: true }),
+      sansBold: await doc.embedFont(brand.sansBold, { subset: true }),
+    };
+  } else {
+    f = {
+      serif: await doc.embedFont(StandardFonts.TimesRoman),
+      serifBold: await doc.embedFont(StandardFonts.TimesRomanBold),
+      serifItalic: await doc.embedFont(StandardFonts.TimesRomanItalic),
+      sans: await doc.embedFont(StandardFonts.Helvetica),
+      sansBold: await doc.embedFont(StandardFonts.HelveticaBold),
+    };
+  }
+  const clean = (s: string) => (brand ? s.replace(/[\u0000-\u001F]/g, ' ') : latin1(s));
+  const arrow = brand ? '\u2192' : '->';
 
   let page: PDFPage = doc.addPage([W, H]);
   let y = H - M;
@@ -151,8 +176,8 @@ export async function buildReport(input: ReportInput): Promise<Uint8Array> {
   }
   page.drawRectangle({ x: gx, y: gy, width: G, height: G, borderColor: MOSS, borderWidth: 0.8, opacity: 0 });
   // Axis labels
-  page.drawText(`${AXES.fit.name} ->`, { x: gx - 6, y: gy + half - 12, size: 8, font: f.sans, color: MUTED, rotate: degrees(90) });
-  page.drawText(`${AXES.carry.name} ->`, { x: gx + half - 14, y: gy - 13, size: 8, font: f.sans, color: MUTED });
+  page.drawText(`${AXES.fit.name} ${arrow}`, { x: gx - 6, y: gy + half - 12, size: 8, font: f.sans, color: MUTED, rotate: degrees(90) });
+  page.drawText(`${AXES.carry.name} ${arrow}`, { x: gx + half - 14, y: gy - 13, size: 8, font: f.sans, color: MUTED });
   // Dot
   const dx = gx + (r.carry.score / 30) * G;
   const dy = gy + (r.fit.score / 30) * G;
@@ -166,7 +191,7 @@ export async function buildReport(input: ReportInput): Promise<Uint8Array> {
   text(quadrant.name, { font: f.serifBold, size: 24, x: rx, width: rw, after: 0 });
   text(quadrant.question, { font: f.serifItalic, size: 13, color: MOSS, x: rx, width: rw, after: 6 });
   text(quadrant.description, { size: 10.5, x: rx, width: rw, after: 8 });
-  text(`${AXES.fit.name}  ${fmt(r.fit.score)} ${COPY.scoreOutOf}      ${AXES.carry.name}  ${fmt(r.carry.score)} ${COPY.scoreOutOf}`, {
+  text(`${AXES.fit.name} ${fmt(r.fit.score)} ${COPY.scoreOutOf}  \u00B7  ${AXES.carry.name} ${fmt(r.carry.score)} ${COPY.scoreOutOf}`, {
     font: f.sansBold,
     size: 11,
     x: rx,
